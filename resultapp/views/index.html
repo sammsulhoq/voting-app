@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Result App</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">Result App</a>
+    </nav>
+    <div class="row mt-5 pt-5">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <div class="card-header text-center">
+                    Results
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Cat
+                        <span id="cat_vote_count" class="badge badge-primary badge-pill">0</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Dog
+                        <span id="dog_vote_count" class="badge badge-primary badge-pill">0</span id="cat_vote_count">
+                    </li>
+                </ul>
+            </div>
+            <div class="card-footer text-muted">
+                <strong><span id="winning_message"></span></strong>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(() => {
+            let cat_vote_count = 0;
+            let dog_vote_count = 0;
+            setInterval(() => {
+                $.ajax({
+                    url: "http://localhost:5000/CAT",
+                    success: function (data, status) {
+                        if (data !== '') {
+                            cat_vote_count = data;
+                            $("#cat_vote_count").text(data);
+                        }
+                    }
+                });
+                $.ajax({
+                    url: "http://localhost:5000/DOG",
+                    success: function (data, status) {
+                        if (data !== '') {
+                            dog_vote_count = data;
+                            $("#dog_vote_count").text(data);
+                        }
+                    }
+                });
+
+                if ((cat_vote_count > 0 && dog_vote_count > 0) && cat_vote_count === dog_vote_count) {
+                    $("#winning_message").text("Oh, both are on same level.")
+                } else if (cat_vote_count > dog_vote_count) {
+                    $("#winning_message").text("Clearly, CAT is winning the contest.")
+                } else {
+                    $("#winning_message").text("Clearly, DOG is winning the contest.")
+                }
+            }, 5000);
+        });
+    </script>
+</body>
+
+</html>
