@@ -73,7 +73,7 @@ Once you start the **voteapp**, you can see something as follows:
 
 When you cast the vote in **voteapp**, you can see the broadcast message in the Redis client (proovided that, **MONITOR** command is already running there), something like this:
 
-![Image for monitor command result in redis client](images/monitor_in_redis_client.png)
+![Image for monitor command result in redis client](images/monitor_in_redis_client.PNG)
 
 So, everything is set, then what are you waiting for? Head over to the **resultapp** and see the real-time voting results.
 
