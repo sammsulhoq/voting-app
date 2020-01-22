@@ -1,16 +1,16 @@
 # Voting App
 Voting App is a sample application which demonstrates the use of **Redis** as a communication medium for two different applications.
-The project has two different modules, built with two different technologies which has their own functionalities but share the data among themselves using **publish/subscribe** messaging paradigm of **Redis**.
+The project has two different modules, built with two different technologies and they have their own functionalities but share the data among themselves using **publish/subscribe** messaging paradigm of **Redis**.
 
 ***
 
 ### Modules Overview
-Following are two modules that is built under this project:
+Following are two modules that has been built under this project:
 
 * voteapp - Built using [Django] framework.
 * resultapp - Built using [NodeJS].
 
-The **voteapp** is basically a web app to select your favorite pet! Yes, you read it right. :smile: The idea is simple and fun to implement. There two options to select, either 'Dog' or 'Cat' as your favorite pet. Once you make a selection, the vote is registered in the in-memory cache using Redis and **publish** event is broadcasted over the channel so that the subscriber(s) can consume the broadcast message.
+The **voteapp** is basically a web app to select your favorite pet! Yes, you read it right. :smile: The idea is simple and fun to implement. There are two options to select, either 'Dog' or 'Cat' as your favorite pet. Once you make a selection, the vote is registered in the in-memory cache using Redis and **publish** event is broadcasted over the channel so that the subscriber(s) can consume the broadcast message.
 
 Whereas, the **resultapp** is a web app built to show the results of the voting in the real-time and display the results of the vote as who is winning over whom. :smiley: This NodeJS application has **subscriber** which listens to the broadcast event of **voteapp** and upon receiving a message, it looks for the total number of votes for that particular pet in the in-memory cache and displays it on the UI. Also, to be specific, the application has a RESTful API which is basically acting as a **subscriber**, which has been used in the application to display the result in real-time. This extends the capability of **subscriber** to be used in other places as it is not tightly bound to the application itself and can be integrated in some other fun app (looking for the same results).
 
@@ -33,7 +33,7 @@ So, overall it's a fun application while demonstrating the communication of two 
 #### Redis Server
 * [Redis]
 
-*Please note, that I've downloaded the executable Redis Server from [here]. If you are using Windows, then visit the page and download the appropriate zip file. After extracting the zip, you can find two folders: **32bit** and **64bit**. As per your system architecture, cd into that particular folder and you can run the server and client from there. For non-Windows environment, please find the relevant installation instructions and set it up accordingly.*
+*Please note that I've downloaded the executable Redis Server from [here]. If you are using Windows, then visit the page and download the appropriate zip file. After extracting the zip, you can find two folders: **32bit** and **64bit**. As per your system architecture, cd into that particular folder and you can run the server and client from there. For non-Windows environment, please find the relevant installation instructions and set it up accordingly.*
 
 ***
 
